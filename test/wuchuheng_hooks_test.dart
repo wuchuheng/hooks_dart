@@ -21,5 +21,10 @@ void main() {
       Future.delayed(Duration(seconds: 1), () => strHook.set(expectValue));
       expect(await subscribeTest() == expectValue, isTrue);
     });
+    test('SubjectHook Test', () async {
+      SubjectHook subjectHook = SubjectHook<bool>();
+      Future.delayed(Duration(seconds: 1), () => subjectHook.next(true));
+      expect(await subjectHook.toFuture(), true);
+    });
   });
 }

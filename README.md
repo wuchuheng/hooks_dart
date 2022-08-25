@@ -13,7 +13,7 @@ Hooks is a state management library where data can be set and changes can be sub
 import 'package:wuchuheng_hooks/src/index.dart';
 import 'package:wuchuheng_hooks/src/subscription_builder/subscription_builder_abstract.dart';
 
-void main() {
+void main() async {
   /// basic usage.
   Hook<String> strHook = Hook('Hi');
   final subscribe = strHook.subscribe((value) {
@@ -43,6 +43,13 @@ void main() {
   hook1.set('Hi');
   hook2.set(74110);
   unsubscribeCollect.unsubscribe();
+
+  /// SubjectHook
+  SubjectHook subjectHook = SubjectHook<bool>();
+  Future.delayed(Duration(seconds: 10), () => subjectHook.next(true));
+  // 10s waiting for results
+  final result = await subjectHook.toFuture();
+  print(result); // true
 }
 ```
 

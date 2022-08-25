@@ -5,3 +5,7 @@
 ## 0.0.2
 
 -  Optimize file export
+
+## 0.0.3
+
+-  created SubjectHook function.
