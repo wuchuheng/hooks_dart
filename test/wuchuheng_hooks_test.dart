@@ -25,6 +25,10 @@ void main() {
       SubjectHook subjectHook = SubjectHook<bool>();
       Future.delayed(Duration(seconds: 1), () => subjectHook.next(true));
       expect(await subjectHook.toFuture(), true);
+      late bool isOk = false;
+      subjectHook.subscribe((value) => isOk = value);
+      subjectHook.next(true);
+      expect(isOk, true);
     });
   });
 }

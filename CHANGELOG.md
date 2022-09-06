@@ -9,3 +9,7 @@
 ## 0.0.3
 
 -  created SubjectHook function.
+
+## 0.0.4
+
+-  feat: add subject method to subjectHook.

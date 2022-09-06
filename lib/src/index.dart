@@ -17,12 +17,12 @@ class Hook<T> {
     _onEvent.next(value);
   }
 
-  Unsubscribe subscribe(void Function(T value) callback) =>
-      _onEvent.subscribe(callback);
+  Unsubscribe subscribe(void Function(T value) callback) => _onEvent.subscribe(callback);
 }
 
 class SubjectHook<T> {
   final List<Function(T value)> _callback = [];
+  final Subscription<T> _onEvent = SubscriptionBuilder.builder();
 
   Future<T> toFuture() async {
     Completer<T> completer = Completer();
@@ -33,10 +33,13 @@ class SubjectHook<T> {
     return completer.future;
   }
 
+  Unsubscribe subscribe(void Function(T value) callback) => _onEvent.subscribe(callback);
+
   next(T value) {
     for (var callback in _callback) {
       callback(value);
     }
     _callback.clear();
+    _onEvent.next(value);
   }
 }
