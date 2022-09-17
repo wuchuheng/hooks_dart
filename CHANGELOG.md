@@ -17,3 +17,7 @@
 ## 0.0.5
 
 -  chore: updated version
+
+## 0.0.6
+
+-  chore: updated version
