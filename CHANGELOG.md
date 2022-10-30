@@ -21,3 +21,7 @@
 ## 0.0.6
 
 -  chore: updated version
+
+## 0.0.7
+
+- feat: add cancel feature for subscription.

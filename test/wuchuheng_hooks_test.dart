@@ -13,7 +13,7 @@ void main() {
       Hook<String> strHook = Hook('Hi');
       Future<String> subscribeTest() {
         final completer = Completer<String>();
-        strHook.subscribe((value) => completer.complete(value));
+        strHook.subscribe((value, cancel) => completer.complete(value));
         return completer.future;
       }
 
@@ -26,8 +26,23 @@ void main() {
       Future.delayed(Duration(seconds: 1), () => subjectHook.next(true));
       expect(await subjectHook.toFuture(), true);
       late bool isOk = false;
-      subjectHook.subscribe((value) => isOk = value);
+      subjectHook.subscribe((value, cancel) => isOk = value);
       subjectHook.next(true);
+      expect(isOk, true);
+    });
+
+    test('Cancel Test', () async {
+      SubjectHook subjectHook = SubjectHook<bool>();
+      Future.delayed(Duration(seconds: 1), () => subjectHook.next(true));
+      expect(await subjectHook.toFuture(), true);
+      late bool isOk = false;
+      subjectHook.subscribe((value, cancel) {
+        isOk = value;
+        cancel();
+      });
+      subjectHook.next(true);
+      subjectHook.next(false);
+      await Future.delayed(Duration(seconds: 1));
       expect(isOk, true);
     });
   });

@@ -4,7 +4,7 @@ import 'package:wuchuheng_hooks/src/subscription_builder/subscription_builder_ab
 void main() async {
   /// basic usage.
   Hook<String> strHook = Hook('Hi');
-  final subscribe = strHook.subscribe((value) {
+  final subscribe = strHook.subscribe((value, cancel) {
     print(value);
     // -> new Data
   });
@@ -18,11 +18,11 @@ void main() async {
   Hook<String> hook1 = Hook('');
   Hook<int> hook2 = Hook(0);
   final unsubscribeCollect = UnsubscribeCollect([
-    hook1.subscribe((value) {
+    hook1.subscribe((value, cancel) {
       print(value);
       // -> hi
     }),
-    hook2.subscribe((value) {
+    hook2.subscribe((value, cancel) {
       print(value);
       // -> 74110
     })

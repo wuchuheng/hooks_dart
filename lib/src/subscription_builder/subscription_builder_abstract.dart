@@ -10,15 +10,24 @@ class Unsubscribe implements UnsubscribeAbstract {
 }
 
 class Subscription<T> {
-  Map<int, Function(T data)> _idMapcallback = {};
+  Map<int, Function(T data, void Function() cancel)> _idMapcallback = {};
   @override
   Subscription<T> next(T data) {
-    _idMapcallback.forEach((_, callback) => callback(data));
+    List<int> deletedIds = [];
+    _idMapcallback.forEach((id, callback) {
+      callback(data, () {
+        deletedIds.add(id);
+      });
+    });
+    for (var id in deletedIds) {
+      _idMapcallback.remove(id);
+    }
+    deletedIds.clear();
 
     return this;
   }
 
-  Unsubscribe subscribe(Function(T data) callback) {
+  Unsubscribe subscribe(Function(T data, void Function() cancel) callback) {
     int id = DateTime.now().microsecondsSinceEpoch;
     _idMapcallback[id] = callback;
     return Unsubscribe(() {
@@ -40,8 +49,7 @@ class SubscriptionBuilder {
 class UnsubscribeCollect implements UnsubscribeCollectAbstract {
   final List<UnsubscribeAbstract> _unsubscribeList;
 
-  UnsubscribeCollect(List<UnsubscribeAbstract> unsubscribeList)
-      : _unsubscribeList = unsubscribeList;
+  UnsubscribeCollect(List<UnsubscribeAbstract> unsubscribeList) : _unsubscribeList = unsubscribeList;
 
   @override
   void unsubscribe() {
