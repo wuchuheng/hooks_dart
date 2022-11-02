@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 import 'unsubscription_builder.dart';
 
 class Unsubscribe implements UnsubscribeAbstract {
@@ -10,10 +12,10 @@ class Unsubscribe implements UnsubscribeAbstract {
 }
 
 class Subscription<T> {
-  Map<int, Function(T data, void Function() cancel)> _idMapcallback = {};
+  Map<String, Function(T data, void Function() cancel)> _idMapcallback = {};
   @override
   Subscription<T> next(T data) {
-    List<int> deletedIds = [];
+    List<String> deletedIds = [];
     _idMapcallback.forEach((id, callback) {
       callback(data, () {
         deletedIds.add(id);
@@ -28,7 +30,7 @@ class Subscription<T> {
   }
 
   Unsubscribe subscribe(Function(T data, void Function() cancel) callback) {
-    int id = DateTime.now().microsecondsSinceEpoch;
+    String id = Uuid().v4();
     _idMapcallback[id] = callback;
     return Unsubscribe(() {
       if (_idMapcallback[id] != null) {

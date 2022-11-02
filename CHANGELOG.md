@@ -25,3 +25,7 @@
 ## 0.0.7
 
 - feat: add cancel feature for subscription.
+
+## 0.0.8
+
+- fix: Fix issue caused by possible concurrent operations
