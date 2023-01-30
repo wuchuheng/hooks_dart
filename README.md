@@ -71,8 +71,7 @@ void main() async {
   // ChannelHook
   final ChannelHook<String> stringHook = ChannelHook<String>();
   final String expectValue = 'foo';
-  stringHook.value.then((value) {
-    // <-- get value from channel
+  stringHook.value.then((value) { // <-- get value from channel
     print(value); //  foo
   });
   stringHook.push(expectValue); // <-- push value to channel
