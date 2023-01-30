@@ -33,3 +33,7 @@
 ## 0.0.9
 
 - feat: Add the channel feature.
+- 
+## 0.1.0
+
+- docs: update README.md
