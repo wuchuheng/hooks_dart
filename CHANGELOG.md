@@ -29,3 +29,7 @@
 ## 0.0.8
 
 - fix: Fix issue caused by possible concurrent operations
+
+## 0.0.9
+
+- feat: Add the channel feature.

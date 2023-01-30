@@ -1,6 +1,6 @@
 name: wuchuheng_hooks
 description: Hooks is a state management library where data can be set and changes can be subscribed.
-version: 0.0.8
+version: 0.0.9
 homepage: https://github.com/wuchuheng/hooks_dart
 
 environment:

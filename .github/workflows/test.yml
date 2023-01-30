@@ -1,0 +1,22 @@
+name: Library testing
+
+on:
+  push:
+    branches:
+      - dev
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.10'
+      - run: flutter --version
+      - run: dart --version
+      - name: Install dependencies
+        run: dart pub get
+      - name: Testing
+        run: dart test
