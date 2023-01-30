@@ -1,5 +1,6 @@
 import 'package:wuchuheng_hooks/src/index.dart';
 import 'package:wuchuheng_hooks/src/subscription_builder/subscription_builder_abstract.dart';
+import 'package:wuchuheng_hooks/wuchuheng_hooks.dart';
 
 void main() async {
   /// basic usage.
@@ -38,4 +39,14 @@ void main() async {
   // 10s waiting for results
   final result = await subjectHook.toFuture();
   print(result); // true
+
+  // ChannelHook
+  final ChannelHook<String> stringHook = ChannelHook<String>();
+  final String expectValue = 'foo';
+  stringHook.value.then((value) {
+    // <-- get value from channel
+    print(value); //  foo
+  });
+  stringHook.push(expectValue); // <-- push value to channel
+  await Future.delayed(Duration(seconds: 1));
 }
