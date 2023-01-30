@@ -1,5 +1,22 @@
+<a href="https://pub.dev/packages/wuchuheng_hooks">
 
+<h1 align="center">
+wuchuheng_hooks
+</h1>
+</a>
+
+<p align="center">
 Hooks is a state management library where data can be set and changes can be subscribed.
+</p>
+
+<p align="center">
+    <a href="https://github.com/wuchuheng/hooks_dart/actions/workflows/test.yml" >
+        <img src="https://github.com/wuchuheng/hooks_dart/actions/workflows/test.yml/badge.svg" />
+    </a>
+</p>
+
+
+
 ## Features
 
 * Get data status
